@@ -8,7 +8,7 @@
 				restrict: 'E',
 				templateUrl: 'scripts/host/host.html',
 				controller: 'HostController',
-				constrollerAs: 'host'
+				controllerAs: 'host'
 			}
 		});
 

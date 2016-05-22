@@ -1,5 +1,4 @@
 <h1>Hello World!</h1>
-<form name="formAdress" ng-submit="formAdress.$valid && host.designate(ip)" novalidate/>
-	<input type="number" ng-model="ip" placeholder="IP adress" required/>
-	<button type="submit">Submit</button>
-</form>
+<input type="number" ng-model="host.adress.ip" placeholder="IP adress" required/>
+<input type="number" ng-model="host.adress.mask" placeholder="subnet mask" required/>
+<button type="submit" ng-click="host.designate(host.adress)">Submit</button>
