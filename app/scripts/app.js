@@ -3,7 +3,7 @@
 
 	angular
 		.module('app', [
-			'ngCookies', 'ngRoute',
+			'ngCookies', 'ngRoute', 'ui.mask',
 			// Custom Directives
 			'host'
 			]);
