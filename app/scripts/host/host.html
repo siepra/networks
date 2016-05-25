@@ -1,6 +1,8 @@
 <h1>Hello World!</h1>
 <label>IP adress</label>
-<input type="text" ng-model="host.adress.ip" ui-mask="999.999.999.999" ui-mask-placeholder="" ui-mask-placeholder-char="_" required/>
+<!-- <input type="text" ng-model="host.adress.ip" ui-mask="999.999.999.999" ui-mask-placeholder="" ui-mask-placeholder-char="_" required/> -->
+<input type="text" ng-model="host.adress.ip" required/>
 <label>Subnet mask</label>
-<input type="text" ng-model="host.adress.mask" ui-mask="999.999.999.999" ui-mask-placeholder="" ui-mask-placeholder-char="_" required/>
+<!-- <input type="text" ng-model="host.adress.mask" ui-mask="999.999.999.999" ui-mask-placeholder="" ui-mask-placeholder-char="_" required/> -->
+<input type="text" ng-model="host.adress.mask" required/>
 <button type="submit" ng-click="host.designate(host.adress)">Submit</button>

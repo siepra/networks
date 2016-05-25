@@ -21,8 +21,23 @@
 			}
 
 			toBinary() {
-				$scope.ip = this.ip.toString(2);
-				$scope.mask = this.mask.toString(2);
+				var ipArray = this.ip.split('.');
+				var maskArray = this.mask.split('.');
+
+				var binary = [];
+
+				ipArray.forEach(function(i, d) {
+
+					binary.push(parseInt(i).toString(2));
+				});
+
+				// maskArray.forEach(function(i, d) {
+				// 	binary.push(parseInt(i).toString(2));
+				// });
+
+				console.log(binary);
+				// $scope.ip = this.ip.toString(2);
+				// $scope.mask = this.mask.toString(2);
 			}
 		}
 
