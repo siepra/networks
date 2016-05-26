@@ -16,35 +16,105 @@
 				this.mask = mask;
 			}
 
-			count() {
-				return this.toBinary();
+			opHosts() {
+				$scope.binary = this.toBinary();
+				$scope.compare = this.splitBinary();
+				if($scope.binary)
+					this.splitBinary();
+				if($scope.compare)
+					this.networkAdress();
+					this.broadcastAdress();
+			}
+
+			fillBinary(ip, mask) {
+
+				var binIP = [];
+				var binMask = [];
+
+				function Binary(binIP, binMask) {
+					this.ip = binIP;
+					this.mask = binMask;
+				}
+
+				ip.forEach(function(i, d) {
+					binIP.push(('00000000'+i).slice(-8));
+				});
+				mask.forEach(function(i, d) {
+					binMask.push(('00000000'+i).slice(-8));
+				});				
+				return new Binary(binIP, binMask);
 			}
 
 			toBinary() {
-				var ipArray = this.ip.split('.');
-				var maskArray = this.mask.split('.');
+				this.ip = this.ip.split('.');
+				this.mask = this.mask.split('.');
 
-				var binary = [];
+				var ip = [];
+				var mask = [];
 
-				ipArray.forEach(function(i, d) {
+				this.ip.forEach(function(i, d) {
+					ip.push(parseInt(i).toString(2));
+				});
+				this.mask.forEach(function(i, d) {
+					mask.push(parseInt(i).toString(2));
+				});
+				return this.fillBinary(ip, mask);
+			}
 
-					binary.push(parseInt(i).toString(2));
+			splitBinary() {
+				var splitIP = [];
+				var splitMask = [];
+
+				var stringIP = '';
+				var stringMask = '';
+
+				function Compare(ip, mask) {
+					this.ip = ip;
+					this.mask = mask;
+				}
+
+				$scope.binary.ip.forEach(function(i, d) {
+					stringIP += i;
+				});
+				$scope.binary.mask.forEach(function(i, d) {
+					stringMask += i;
 				});
 
-				// maskArray.forEach(function(i, d) {
-				// 	binary.push(parseInt(i).toString(2));
-				// });
+				splitIP = stringIP.split('');
+				splitMask = stringMask.split('');
 
-				console.log(binary);
-				// $scope.ip = this.ip.toString(2);
-				// $scope.mask = this.mask.toString(2);
+				return new Compare(splitIP, splitMask);		
+			}
+
+			networkAdress() {
+				$scope.adressNetwork = [];
+
+				$scope.compare.ip.forEach(function(i, d) {
+					if($scope.compare.mask[d] == '1') {
+						$scope.adressNetwork.push(i);
+					} else {
+						$scope.adressNetwork.push('0');
+					}
+				});
+			}
+
+			broadcastAdress() {
+				$scope.adressBroadcast = [];
+
+				$scope.compare.ip.forEach(function(i, d) {
+					if($scope.compare.mask[d] == '0') {
+						$scope.adressBroadcast.push(i);
+					} else {
+						$scope.adressBroadcast.push('0');
+					}
+				});
 			}
 		}
 
 		function designate(adress) {
 			var obj = new Adress(adress.ip, adress.mask);
 			this.adress = {};
-			return obj.count();
+			return obj.opHosts();
 		}
 	}
 

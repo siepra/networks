@@ -1,8 +1,35 @@
-<h1>Hello World!</h1>
-<label>IP adress</label>
-<!-- <input type="text" ng-model="host.adress.ip" ui-mask="999.999.999.999" ui-mask-placeholder="" ui-mask-placeholder-char="_" required/> -->
-<input type="text" ng-model="host.adress.ip" required/>
-<label>Subnet mask</label>
-<!-- <input type="text" ng-model="host.adress.mask" ui-mask="999.999.999.999" ui-mask-placeholder="" ui-mask-placeholder-char="_" required/> -->
-<input type="text" ng-model="host.adress.mask" required/>
-<button type="submit" ng-click="host.designate(host.adress)">Submit</button>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<form name="adressForm" ng-submit="adressForm.$valid && host.designate(host.adress)" novalidate>
+				<label for="ip">IP adress</label>
+				<input name="ip" type="text" ng-model="host.adress.ip" required/>
+				<label for="mask">Subnet mask</label>
+				<input name="mask" type="text" ng-model="host.adress.mask" required/>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="container">
+		<label ng-if="binary.ip">binary IP: </label>
+			<span ng-repeat="part in binary.ip track by $index">{{part}}
+				<span ng-if="($index+1) % 4 !== 0">.</span>
+			</span><br/>
+			<label ng-if="binary.mask">binary submask: </label>
+			<span ng-repeat="part in binary.mask track by $index">{{part}}
+				<span ng-if="($index+1) % 4 !== 0">.</span>
+			</span><br/>
+			<label ng-if="adressNetwork">network adress: </label>
+			<span ng-repeat="part in adressNetwork track by $index">{{part}}
+				<span ng-if="($index+1) % 8 == 0 && ($index+1) % 32 !== 0">.</span>
+			</span><br/>
+			<label ng-if="adressBroadcast">broadcast adress: </label>
+			<span ng-repeat="part in adressBroadcast track by $index">{{part}}
+				<span ng-if="($index+1) % 8 == 0 && ($index+1) % 32 !== 0">.</span>
+			</span><br/>
+		</div>
+	</div>
+</div>
