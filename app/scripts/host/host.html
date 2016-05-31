@@ -1,35 +1,36 @@
 <div class="row">
-	<div class="col-md-12">
-		<div class="form-group">
-			<form name="adressForm" ng-submit="adressForm.$valid && host.designate(host.adress)" novalidate>
-				<label for="ip">IP adress</label>
-				<input name="ip" type="text" ng-model="host.adress.ip" required/>
-				<label for="mask">Subnet mask</label>
-				<input name="mask" type="text" ng-model="host.adress.mask" required/>
-				<button type="submit">Submit</button>
-			</form>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<div class="container">
-		<label ng-if="binary.ip">binary IP: </label>
-			<span ng-repeat="part in binary.ip track by $index">{{part}}
-				<span ng-if="($index+1) % 4 !== 0">.</span>
-			</span><br/>
-			<label ng-if="binary.mask">binary submask: </label>
-			<span ng-repeat="part in binary.mask track by $index">{{part}}
-				<span ng-if="($index+1) % 4 !== 0">.</span>
-			</span><br/>
-			<label ng-if="adressNetwork">network adress: </label>
-			<span ng-repeat="part in adressNetwork track by $index">{{part}}
-				<span ng-if="($index+1) % 8 == 0 && ($index+1) % 32 !== 0">.</span>
-			</span><br/>
-			<label ng-if="adressBroadcast">broadcast adress: </label>
-			<span ng-repeat="part in adressBroadcast track by $index">{{part}}
-				<span ng-if="($index+1) % 8 == 0 && ($index+1) % 32 !== 0">.</span>
-			</span><br/>
+	<div class="col-md-6">
+		<div class="box">
+			<div class="form-group">
+				<form name="adressForm" ng-submit="adressForm.$valid && host.designate(host.adress)" novalidate>
+					<label for="ip">IP adress</label>
+					<input id="ip" name="ip" type="text" class="net" ng-model="host.adress.ip" required/>
+					<label for="mask">Subnet mask</label>
+					<select id="mask" name="mask" ng-model="host.adress.mask" required>
+						<option ng-repeat="mask in host.subnet" value="{{mask.adr}}">{{mask.CIDR+' aka '+mask.adr}}</option>
+					</select>
+					<!-- <input id="mask" name="mask" type="text" class="net" ng-model="host.adress.mask" required/> -->
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+			<div class="container">
+				<label ng-if="binary.ip">binary IP: </label>
+				<span ng-repeat="part in binary.ip track by $index">{{part}}
+					<span ng-if="($index+1) % 4 !== 0">.</span>
+				</span><br/>
+				<label ng-if="binary.mask">binary submask: </label>
+				<span ng-repeat="part in binary.mask track by $index">{{part}}
+					<span ng-if="($index+1) % 4 !== 0">.</span>
+				</span><br/>
+				<label ng-if="adressNetwork">network adress: </label>
+				<span ng-repeat="part in adressNetwork track by $index">{{part}}
+					<span ng-if="($index+1) % 4 !== 0">.</span>
+				</span><br/>
+				<label ng-if="adressBroadcast">broadcast adress: </label>
+				<span ng-repeat="part in adressBroadcast track by $index">{{part}}
+					<span ng-if="($index+1) % 4 !== 0">.</span>
+				</span><br/>
+			</div>
 		</div>
 	</div>
 </div>

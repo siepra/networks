@@ -1,0 +1,11 @@
+body {
+	overflow: hidden;
+}
+
+.box {
+	width: 100%;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(20%, 20%);
+}
