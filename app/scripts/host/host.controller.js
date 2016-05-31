@@ -132,24 +132,138 @@
 			}
 		];
 
+		class Basic {
+
+			constructor(ip_binary, mask_binary, ip_decimal, mask_decimal) {
+				this.ip_binary = ip_binary;
+				this.mask_binary = mask_binary;
+				this.ip_decimal = ip_decimal;
+				this.mask_decimal = mask_decimal;
+			}
+
+			static toBinary(ip, mask) {
+
+				var ip_bin = [];
+				var mask_bin = [];				
+
+				ip.forEach(function(item, index) {
+					ip_bin.push(('00000000'+(parseInt(item).toString(2))).slice(-8));
+				});
+				mask.forEach(function(item, index) {
+					mask_bin.push(('00000000'+(parseInt(item).toString(2))).slice(-8));
+				});
+				$scope.basic = new Basic(ip_bin, mask_bin, ip, mask);
+				return $scope.basic.preAdresses();
+			}
+
+			preAdresses() {
+
+				var ip_split = [];
+				var mask_split = [];
+
+				var ip_string = '';
+				var mask_string = '';
+
+				function Compare(ip, mask) {
+					this.ip = ip;
+					this.mask = mask;
+				}
+
+				this.ip_binary.forEach(function(item, index) {
+					ip_string += item;
+				});
+				this.mask_binary.forEach(function(item, index) {
+					mask_string += item;
+				});
+
+				ip_split = ip_string.split('');
+				mask_split = mask_string.split('');
+
+				$scope.network = Network.networkAdress(ip_split, mask_split);
+				$scope.broadcast = Broadcast.broadcastAdress(ip_split, mask_split);
+			}
+		}
+
 		class Adress {
 
-			constructor(ip, mask) {
-				this.ip = ip;
-				this.mask = mask;
+			constructor(binary, decimal) {
+				this.binary = binary;
+				this.decimal = decimal;
 			}
 
-			opHosts() {
-				$scope.binary = this.toBinary();
-				$scope.compare = this.splitBinary();
-				if($scope.binary)
-					this.splitBinary();
-				if($scope.compare)
-					this.networkAdress();
-					this.broadcastAdress();
+			static binaryToDecimal(array) {
+
+				var decimal = [];
+
+				array.forEach(function(item, index) {
+					decimal.push(parseInt(item, 2));
+				});
+				return decimal;
 			}
 
-			static checkInput(ip, mask) {
+		}
+
+		class Network extends Adress {
+
+			static networkAdress(ip, mask) {
+
+				var separated = [];
+				var binary = [];
+
+				ip.forEach(function(item, index) {
+					if(mask[index] == '1') {
+						separated.push(item);
+					} else {
+						separated.push('0');
+					}
+				});
+
+				var string = separated.join('');
+				var raw = string.match(/.{1,8}/g);
+
+				raw.forEach(function(item, index) {
+					binary.push(item);
+				});
+				var decimal = super.binaryToDecimal(binary);
+				return new Adress(binary, decimal);
+			}	
+		}
+
+		class Broadcast extends Adress {
+
+			static broadcastAdress(ip, mask) {
+
+				var separated = [];
+				var binary = [];
+
+				ip.forEach(function(item, index) {
+					if(mask[index] == '0') {
+						separated.push(item);
+					} else {
+						separated.push('0');
+					}
+				});
+
+				var string = separated.join('');
+				var raw = string.match(/.{1,8}/g);
+
+				raw.forEach(function(item, index) {
+					binary.push(item);
+				});
+				var decimal = super.binaryToDecimal(binary);
+				return new Adress(binary, decimal);
+			}			
+		}
+
+		function designate(adress) {
+			adress.ip = adress.ip.split('.');
+			adress.mask = adress.mask.split('.');
+			if(checkInput(adress.ip, adress.mask) === false)
+				alert("Wrong IP adress format!");
+			this.adress = {};		
+		}
+
+		function checkInput(ip, mask) {
 				var valid = true;
 				if(mask === undefined)
 					return false;
@@ -162,116 +276,8 @@
 				});
 				if(valid == false)
 					return false
-				return new Adress(ip, mask).opHosts();
+				return Basic.toBinary(ip, mask);
 			}
-
-			toBinary() {
-
-				var binIP = [];
-				var binMask = [];				
-
-				function Binary(ip, mask) {
-					this.ip = ip;
-					this.mask = mask;
-				}
-
-				this.ip.forEach(function(item, index) {
-					binIP.push(('00000000'+(parseInt(item).toString(2))).slice(-8));
-				});
-				this.mask.forEach(function(item, index) {
-					binMask.push(('00000000'+(parseInt(item).toString(2))).slice(-8));
-				});
-				return new Binary(binIP, binMask);
-			}
-
-			splitBinary() {
-
-				var splitIP = [];
-				var splitMask = [];
-
-				var stringIP = '';
-				var stringMask = '';
-
-				function Compare(ip, mask) {
-					this.ip = ip;
-					this.mask = mask;
-				}
-
-				$scope.binary.ip.forEach(function(item, index) {
-					stringIP += item;
-				});
-				$scope.binary.mask.forEach(function(item, index) {
-					stringMask += item;
-				});
-
-				splitIP = stringIP.split('');
-				splitMask = stringMask.split('');
-
-				return new Compare(splitIP, splitMask);		
-			}
-
-			networkAdress() {
-
-				var separated = [];
-				var adressNetwork = [];
-
-				$scope.compare.ip.forEach(function(item, index) {
-					if($scope.compare.mask[index] == '1') {
-						separated.push(item);
-					} else {
-						separated.push('0');
-					}
-				});
-
-				var string = separated.join('');
-				var raw = string.match(/.{1,8}/g);
-
-				raw.forEach(function(item, index) {
-					adressNetwork.push(item);
-				});
-				return adressNetwork;
-			}
-
-			broadcastAdress() {
-
-				var separated = [];
-				var adressBroadcast = [];
-
-				$scope.compare.ip.forEach(function(item, index) {
-					if($scope.compare.mask[index] == '0') {
-						separated.push(item);
-					} else {
-						separated.push('0');
-					}
-				});
-
-				var string = separated.join('');
-				var raw = string.match(/.{1,8}/g);
-
-				raw.forEach(function(item, index) {
-					adressBroadcast.push(item);
-				});
-				return adressBroadcast;
-			}
-
-			binaryToDecimal(array) {
-
-				var decimal = [];
-
-				array.forEach(function(item, index) {
-					decimal.push(parseInt(item, 2));
-				});
-				return decimal;
-			}
-		}
-
-		function designate(adress) {
-			adress.ip = adress.ip.split('.');
-			adress.mask = adress.mask.split('.');
-			if(Adress.checkInput(adress.ip, adress.mask) === false)
-				alert("Wrong IP adress format!");
-			this.adress = {};		
-		}
 	}
 
 })();
