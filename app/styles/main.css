@@ -1,11 +1,10 @@
 body {
-	overflow: hidden;
+	overflow-x: hidden;
+	background: #f9f9f9 !important;
 }
 
-.box {
-	width: 100%;
-	position: relative;
-	top: 50%;
+.centered {
 	left: 50%;
-	transform: translate(20%, 20%);
+	top: 20%;
+	transform: translate(50%, 20%);
 }

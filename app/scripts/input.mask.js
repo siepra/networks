@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	$('.net')
+	$('#ip')
 		.mask('0ZZ.0ZZ.0ZZ.0ZZ', {
 			translation: {
 				'Z': {
