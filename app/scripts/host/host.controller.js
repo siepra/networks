@@ -7,6 +7,8 @@
 
 	function Controller($scope) {
 
+		console.log('test');
+
 		this.designate = designate;
 
 		this.subnet = [
