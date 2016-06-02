@@ -3,9 +3,9 @@
 
 	angular
 		.module('app', [
-			'ngCookies', /*'ngRoute',*/
+			// 'ngCookies', 'ngRoute',
 			// Custom Directives
-			'host'
+			// 'host'
 			]);
 
 })();
