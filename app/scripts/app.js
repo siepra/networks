@@ -4,7 +4,7 @@
 	angular
 		.module('app', [
 			'ngCookies', 'ngRoute',
-			Custom Directives
+			// Custom Directives
 			'host'
 			]);
 
