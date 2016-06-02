@@ -282,10 +282,10 @@
 				var binary = [];
 
 				ip.forEach(function(item, index) {
-					if(mask[index] == '0') {
+					if(mask[index] == '1') {
 						separated.push(item);
 					} else {
-						separated.push('0');
+						separated.push('1');
 					}
 				});
 
