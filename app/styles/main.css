@@ -3,6 +3,40 @@ body {
 	background: #f9f9f9 !important;
 }
 
+.jumbotron {
+	position: relative;
+	text-align: center;
+	color: #fff !important;
+	background-image: linear-gradient(to right, #efefef 0, #a38f84 100%);
+}
+
+.jumbotron .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 18px;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.jumbotron .btn {
+	margin-top: 10px;
+	margin-bottom: 25px;
+	padding: 16px 22px;
+	color: #fff !important;
+	border: 1px solid #fff;
+	background: rgba(255,255,255,0.2);
+}
+
+.jumbotron .btn:hover {
+	color: #fff !important;
+	background: rgba(0,0,0,0);	
+}
+
+footer {
+	background-image: linear-gradient(to right, #a38f84 0, #efefef 100%);	
+}
+
 .centered {
 	left: 50%;
 	top: 20%;
