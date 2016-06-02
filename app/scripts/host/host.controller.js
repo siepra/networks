@@ -181,6 +181,50 @@
 
 				$scope.network = Network.networkAdress(ip_split, mask_split);
 				$scope.broadcast = Broadcast.broadcastAdress(ip_split, mask_split);
+				$scope.numberOf = Host.numberOfHosts($scope.network, $scope.broadcast, this.mask_binary);
+			}
+		}
+
+		class Host {
+
+			constructor(binary, decimal) {
+				this.binary = binary;
+				this.decimal = decimal;
+			}
+
+			static markHost(ip, num) {
+				var temp = [];
+				ip.forEach(function(item, index) {
+					temp.push(item);
+				});
+				temp[3] = (temp[3]+num);
+				var binary = Host.decimalToBinary(temp);
+				return new Host(binary, temp);
+			}
+
+			static decimalToBinary(array) {
+
+				var binary = [];
+
+				array.forEach(function(item, index) {
+					binary.push(('00000000'+(parseInt(item).toString(2))).slice(-8));;
+				});
+				return binary;				
+			}
+
+			static numberOfHosts(network, broadcast, mask) {
+				var total = 0;
+				var values = [];
+				mask.forEach(function(a, b) {
+					if(a < 255) {
+						var res = (network.decimal[b]-broadcast.decimal[b])-1;
+						if(res < 0)
+							res = -res
+						values.push(res);
+					}
+				});
+				// pomnożyć przez siebie elementy tablicy, stosując switch albo elseif
+				return total;
 			}
 		}
 
@@ -225,6 +269,7 @@
 					binary.push(item);
 				});
 				var decimal = super.binaryToDecimal(binary);
+				$scope.minHost = Host.markHost(decimal, 1);
 				return new Adress(binary, decimal);
 			}	
 		}
@@ -251,6 +296,7 @@
 					binary.push(item);
 				});
 				var decimal = super.binaryToDecimal(binary);
+				$scope.maxHost = Host.markHost(decimal, -1);
 				return new Adress(binary, decimal);
 			}			
 		}
