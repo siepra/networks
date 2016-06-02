@@ -23,19 +23,23 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Subnet Calculator</h1>
-            <p>This tool was created using AngularJS and Twitter Bootstrap frameworks. <br />Code utilizes object-oriented programming.</p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1>Subnet Calculator</h1>
+                    <p>This tool was created using AngularJS and Twitter Bootstrap frameworks. <br />Code utilizes object-oriented programming.</p>
+                </div>
+                <a href="https://github.com/siepra/networks" target="_blank" class="btn"><span class="fa fa-github"></span>&nbspView on GitHub</a>
+                <div class="bottom">©&nbsp2016</div>
+            </div>
         </div>
-        <a href="https://github.com/siepra/networks" target="_blank" class="btn"><span class="fa fa-github"></span>&nbspView on GitHub</a>
-        <div class="bottom">©&nbsp2016</div>
     </div>
 
     <host></host>
 
     <footer class="footer navbar-fixed-bottom">
-        <!-- footer content -->
+        <!-- ... -->
     </footer>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -51,16 +55,16 @@
     <script src="bower_components/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="app/scripts/app.js"></script>
+    <script src="scripts/app.js"></script>
     <!-- endbuild -->
 
     <!-- Input Mask Configuration -->
-    <script src="app/scripts/input.mask.js"></script>
+    <script src="scripts/input.mask.js"></script>
 
     <!-- Host Custom Directive -->
-    <script src="app/scripts/host/host.module.js"></script>
-    <script src="app/scripts/host/host.directive.js"></script>
-    <script src="app/scripts/host/host.controller.js"></script>
+    <script src="scripts/host/host.module.js"></script>
+    <script src="scripts/host/host.directive.js"></script>
+    <script src="scripts/host/host.controller.js"></script>
 
 </body>
 </html>

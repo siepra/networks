@@ -6,7 +6,7 @@
 		.directive('host', function() {
 			return {
 				restrict: 'E',
-				templateUrl: 'app/scripts/host/host.html',
+				templateUrl: 'scripts/host/host.html',
 				controller: 'HostController',
 				controllerAs: 'host'
 			}
