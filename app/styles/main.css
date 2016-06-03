@@ -21,7 +21,7 @@ body {
 
 .jumbotron .btn {
 	margin-top: 10px;
-	margin-bottom: 25px;
+	margin-bottom: 40px;
 	padding: 16px 22px;
 	color: #fff !important;
 	border: 1px solid #fff;
@@ -35,10 +35,4 @@ body {
 
 footer {
 	background-image: linear-gradient(to right, #553982 0, #553982 100%);	
-}
-
-.centered {
-	left: 50%;
-	top: 20%;
-	transform: translate(50%, 20%);
 }
