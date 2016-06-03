@@ -7,7 +7,7 @@ body {
 	position: relative;
 	text-align: center;
 	color: #fff !important;
-	background-image: linear-gradient(to right, #efefef 0, #a38f84 100%);
+	background-image: linear-gradient(to right, #e14938 0, #553982 100%);
 }
 
 .jumbotron .bottom {
@@ -34,7 +34,7 @@ body {
 }
 
 footer {
-	background-image: linear-gradient(to right, #a38f84 0, #efefef 100%);	
+	background-image: linear-gradient(to right, #553982 0, #553982 100%);	
 }
 
 .centered {

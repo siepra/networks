@@ -35,6 +35,7 @@
       						<th>#</th>
       						<th>Decimal</th>
       						<th>Binary</th>
+                  <th>Old-school IP class</th>
     					</tr>
   					</thead>
   					<tbody>
@@ -42,32 +43,44 @@
       						<th scope="row">IP</th>
       						<td><span ng-repeat="part in basic.ip_decimal track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
       						<td><span ng-repeat="part in basic.ip_binary track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
+                  <td>{{IPClass}}</td>
     					</tr>
     					<tr>
       						<th scope="row">Mask</th>
       						<td><span ng-repeat="part in basic.mask_decimal track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
       						<td><span ng-repeat="part in basic.mask_binary track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
+                  <td>&nbsp</td>
     					</tr>
     					<tr>
       						<th scope="row">Network</th>
       						<td><span ng-repeat="part in network.decimal track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
       						<td><span ng-repeat="part in network.binary track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
+                  <td>&nbsp</td>
     					</tr>
     					<tr>
       						<th scope="row">Broadcast</th>
       						<td><span ng-repeat="part in broadcast.decimal track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
       						<td><span ng-repeat="part in broadcast.binary track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
+                  <td>&nbsp</td>
     					</tr>
     					<tr>
       						<th scope="row">Host minimum</th>
       						<td><span ng-repeat="part in minHost.decimal track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
       						<td><span ng-repeat="part in minHost.binary track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
+                  <td>&nbsp</td>
     					</tr> 
     					<tr>
       						<th scope="row">Host maximum</th>
       						<td><span ng-repeat="part in maxHost.decimal track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
       						<td><span ng-repeat="part in maxHost.binary track by $index">{{part}}<span ng-if="($index+1) % 4 !== 0">.</span></span></td>
-    					</tr>    					   					
+                  <td>&nbsp</td>
+    					</tr>
+              <tr>
+                  <th scope="row">Number of avaible hosts</th>
+                  <td>{{numberOf}}</td>
+                  <td>&nbsp</td>
+                  <td>&nbsp</td>
+              </tr> 					   					
   					</tbody>
 				</table>
 			</div>

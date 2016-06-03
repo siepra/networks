@@ -153,6 +153,7 @@
 					mask_bin.push(('00000000'+(parseInt(item).toString(2))).slice(-8));
 				});
 				$scope.basic = new Basic(ip_bin, mask_bin, ip, mask);
+				$scope.IPClass = $scope.basic.checkIPClass();
 				return $scope.basic.preAdresses();
 			}
 
@@ -182,6 +183,21 @@
 				$scope.network = Network.networkAdress(ip_split, mask_split);
 				$scope.broadcast = Broadcast.broadcastAdress(ip_split, mask_split);
 				$scope.numberOf = Host.numberOfHosts($scope.network, $scope.broadcast, this.mask_binary);
+			}
+
+			checkIPClass() {
+				if(this.ip_decimal[0]>=1 && this.ip_decimal[0]<=126)
+					return 'A';
+				else if(this.ip_decimal[0] == 127)
+					return 'localhost';
+				else if(this.ip_decimal[0]>=128 && this.ip_decimal[0]<=191)
+					return 'B';		
+				else if(this.ip_decimal[0]>=192 && this.ip_decimal[0]<=223)
+					return 'C';		
+				else if(this.ip_decimal[0]>=224 && this.ip_decimal[0]<=239)
+					return 'D';
+				else if(this.ip_decimal[0]>=240 && this.ip_decimal[0]<=255)
+					return 'E';
 			}
 		}
 
@@ -223,7 +239,21 @@
 						values.push(res);
 					}
 				});
-				// pomnożyć przez siebie elementy tablicy, stosując switch albo elseif
+
+				switch(values.length) {
+					case 1:
+					total = values[0];
+					break;
+					case 2:
+					total = values[0]*values[1];
+					break;
+					case 3:
+					total = values[0]*values[1]*values[2];
+					break;
+					case 4:
+					total = values[0]*values[1]*values[2]*values[3];
+					break;
+				}
 				return total;
 			}
 		}
